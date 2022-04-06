@@ -34,4 +34,5 @@ from main.note.route import *
 from main.user.route import *
 from main.hobby.route import *
 from main.movie.route import *
+from main.category.route import *
 from main.movieraw.route import *

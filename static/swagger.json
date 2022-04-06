@@ -1,0 +1,268 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "description": "Learn swagger ui",
+    "version": "1.0.0",
+    "title": "Learn swagger ui",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "servers": [
+    {
+      "url": "/"
+    }
+  ],
+  "host": "http://127.0.0.1:5000",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "notes",
+      "description": "REST Api for CRUD operation Notes"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/notes": {
+      "get": {
+        "tags": [
+          "notes"
+        ],
+        "summary": "retrive all notes data from the database",
+        "description": "",
+        "operationId": "all_note",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "notes"
+        ],
+        "summary": "retrive all notes data from the database",
+        "description": "",
+        "operationId": "add_note",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "detail": "Note Detail",
+            "title": "Note Title, Unique",
+            "author": "Notes author"
+          }
+        ],
+        "requestBody": {
+          "description": "Note Request Object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/noteRequestPostBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/components/schemas/noteRequest"
+            }
+          },
+          "400": {
+            "description": "Failed. invalid Request."
+          },
+          "404": {
+            "description": "Failed. Note request not found."
+          }
+        }
+      }
+    },
+    "/notes/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "ID of the cat that we want to match",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Note Request"
+        ],
+        "summary": "Get note request with given ID",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "Note Request id",
+            "schema": {
+              "$ref": "#/components/schemas/id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/components/schemas/noteRequest"
+            }
+          },
+          "400": {
+            "description": "Failed. Misunderstood Request."
+          },
+          "404": {
+            "description": "Failed. Note request not found."
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Note Request"
+        ],
+        "summary": "update note request with given ID",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "Note Request id",
+            "schema": {
+              "$ref": "#/components/schemas/id"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Note Request Object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/noteRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/components/schemas/noteRequest"
+            }
+          },
+          "400": {
+            "description": "Failed. invalid Request."
+          },
+          "404": {
+            "description": "Failed. Note request not found."
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete Note Request by ID",
+        "tags": [
+          "Note Request"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "Note Request Id",
+            "schema": {
+              "$ref": "#/components/schemas/id"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/components/schemas/id"
+            }
+          },
+          "400": {
+            "description": "Failed. Bad Request."
+          },
+          "404": {
+            "description": "Failed. Note Request not found."
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "id": {
+        "properties": {
+          "id": {
+            "type": "int"
+          }
+        }
+      },
+      "noteRequestPostBody": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "format": "string"
+          },
+          "author": {
+            "type": "string",
+            "format": "string"
+          },
+          "detail": {
+            "type": "string",
+            "format": "string"
+          }
+        }
+      },
+      "noteRequest": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "format": "string"
+          },
+          "author": {
+            "type": "string",
+            "format": "string"
+          },
+          "detail": {
+            "type": "string",
+            "format": "string"
+          }
+        }
+      },
+      "noteRequests": {
+        "type": "object",
+        "properties": {
+          "noteRequest": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/noteRequest"
+            }
+          }
+        }
+      }
+    }
+  }
+}

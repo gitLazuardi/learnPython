@@ -1,4 +1,5 @@
 from main import db,fields,ma
+# from main.movie.models import MovieSchema
 #ONE TO MANY
 class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -11,3 +12,4 @@ class Category(db.Model):
 class CategorySchema(ma.Schema):
     id = fields.Number(dump_only=True)
     name = fields.String(required=True)
+    # movie = fields.Nested(MovieSchema(many=True))
